@@ -1,31 +1,36 @@
-<div class="flex">
+<div class="flex-col">
   <div class="form">
-    <form class="flex justify-center items-center"
-      [formGroup]="form"
-      (ngSubmit)="submitData()">
+    <form class="flex justify-between items-center"
+      [formGroup]="form">
 
-        <mat-form-field appearance="outline">
-          <mat-label>First name</mat-label>
-          <input formControlName="firstName" matInput placeholder="First name">
-        </mat-form-field>
+        <input pInputText type="text" placeholder="First name" formControlName="firstName" />
+        <input pInputText type="text" placeholder="Last name" formControlName="lastName" />
+        <p-inputNumber placeholder="0,00" formControlName="participation" mode="decimal" locale="pt-Br" [minFractionDigits]="2">
+        </p-inputNumber>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Last name</mat-label>
-          <input formControlName="lastName" matInput placeholder="Last name">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Participation</mat-label>
-          <input formControlName="participation" matInput placeholder="Participation">
-          <mat-icon matSuffix>attach_money</mat-icon>
-        </mat-form-field>
-
-      <div>
-        <button mat-stroked-button color="primary">Send</button>
-      </div>
     </form>
+
+    <div class="w-10 ml-3">
+      @if (!this.sendDataLoading) {
+        <p-button label="Send"
+          [text]="true"
+          [raised]="true"
+          [style]="{'background-color': 'white'}"
+          (click)="submitData()">
+        </p-button>
+      } @else if (this.sendDataLoading) {
+        <div class="flex-auto">
+          <p-progressSpinner strokeWidth="5" class="ml-2" styleClass="custom-spinner"
+            [style]="{'width': '2.0rem', 'height': '2.0rem'}"
+            animationDuration=".5s">
+          </p-progressSpinner>
+        </div>
+      }
+    </div>
+
   </div>
-  <div class="data">
+  <div class="data flex justify-center">
+    <h1>DATA</h1>
 
   </div>
 </div>

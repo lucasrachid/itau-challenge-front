@@ -1,20 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
+import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatIconModule, ReactiveFormsModule, MatButtonModule],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    ProgressSpinnerModule,
+    InputTextModule,
+    ButtonModule,
+    InputNumberModule
+  ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent implements OnInit {
   form!: FormGroup;
   controls!: { [key: string]: AbstractControl };
+  sendDataLoading = false;
 
   constructor(private formBuilder: FormBuilder) {
   }
@@ -25,14 +33,24 @@ export class DashboardComponent implements OnInit {
 
   initializeForm(): void {
     this.form = this.formBuilder.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
-      participation: [0, [Validators.required, Validators.min(0.01)]],
+      firstName: [null, [Validators.required]],
+      lastName: [null],
+      participation: [null, [Validators.required, Validators.min(0.01)]],
     });
     this.controls = this.form.controls;
   }
 
   submitData(): void {
     console.log(this.form);
+    if (this.sendDataLoading) {
+      return;
+    }
+    this.sendDataLoading = true;
+    setTimeout(() => {
+      console.log(this.form);
+      this.sendDataLoading = false
+    }, 5000)
+
   }
+
 }
