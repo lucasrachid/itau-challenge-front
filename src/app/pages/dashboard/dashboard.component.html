@@ -1,0 +1,31 @@
+<div class="flex">
+  <div class="form">
+    <form class="flex justify-center items-center"
+      [formGroup]="form"
+      (ngSubmit)="submitData()">
+
+        <mat-form-field appearance="outline">
+          <mat-label>First name</mat-label>
+          <input formControlName="firstName" matInput placeholder="First name">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Last name</mat-label>
+          <input formControlName="lastName" matInput placeholder="Last name">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Participation</mat-label>
+          <input formControlName="participation" matInput placeholder="Participation">
+          <mat-icon matSuffix>attach_money</mat-icon>
+        </mat-form-field>
+
+      <div>
+        <button mat-stroked-button color="primary">Send</button>
+      </div>
+    </form>
+  </div>
+  <div class="data">
+
+  </div>
+</div>
